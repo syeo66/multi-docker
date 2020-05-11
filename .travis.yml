@@ -1,0 +1,23 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build -t syeo66/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true syeo66/react-test yarn test
+
+after_success:
+  - docker build -t syeo66/multi-client ./client
+  - docker build -t syeo66/multi-nginx ./nginx
+  - docker build -t syeo66/multi-server ./server
+  - docker build -t syeo66/multi-worker ./worker
+  # login to docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push to docker hub
+  - docker push syeo66/multi-client
+  - docker push syeo66/multi-nginx
+  - docker push syeo66/multi-server
+  - docker push syeo66/multi-worker
