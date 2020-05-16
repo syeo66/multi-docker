@@ -23,7 +23,7 @@
       "memory": 128
     },
     {
-      "name": "worker",
+      "name": "nginx",
       "image": "syeo66/multi-nginx",
       "essential": true,
       "memory": 128,
