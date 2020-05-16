@@ -5,29 +5,33 @@
       "name": "client",
       "image": "syeo66/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": "128MB"
     },
     {
       "name": "server",
       "image": "syeo66/multi-server",
       "hostname": "api",
-      "essential": false
+      "essential": false,
+      "memory": "128MB"
     },
     {
       "name": "worker",
       "image": "syeo66/multi-worker",
       "hostname": "worker",
-      "essential": false
+      "essential": false,
+      "memory": "128MB"
     },
     {
       "name": "worker",
       "image": "syeo66/multi-nginx",
       "essential": true,
+      "memory": "128MB",
       "portMappings": [
         {
           "hostPort": 80,
           "containerPort": 80
-        }
+        } 
       ],
       "links": ["client", "server"]
     }
