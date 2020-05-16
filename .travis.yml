@@ -22,15 +22,15 @@ after_success:
   - docker push syeo66/multi-server
   - docker push syeo66/multi-worker
 
-  deploy:
-    edge: true
-    provider: elasticbeanstalk
-    region: "eu-central-1"
-    app: "multi-docker"
-    env: "MultiDocker-env"
-    bucket_name: "elasticbeanstalk-eu-central-1-856470128107"
-    bucket_path: "multi-docker"
-    on:
-      branch: master
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-856470128107"
+  bucket_path: "multi-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
