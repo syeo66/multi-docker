@@ -19,8 +19,9 @@ const pgClient = new Pool({
 });
 pgClient.on("error", () => console.log("Lost PG connection"));
 pgClient
-  .query("CREATE TABLE IF NOT EXISTS values (number INT)")
-  .catch((err) => console.log(err));
+  .query("CREATE TABLE IF NOT EXISTS fibs (number INT)")
+  .catch((err) => console.log(err))
+  .then(() => console.log("Database ready"));
 
 // Redis Client Setup
 const redis = require("redis");
@@ -40,7 +41,7 @@ app.get("/", (req, res) => {
 app.get("/values/all", async (req, res) => {
   let values;
   try {
-    values = await pgClient.query("SELECT * FROM values");
+    values = await pgClient.query("SELECT * FROM fibs");
   } catch (err) {
     console.log(err);
   }
@@ -60,7 +61,11 @@ app.post("/values", async (req, res) => {
   }
   redisClient.hset("values", index, "Nothing yet!");
   redisPublisher.publish("insert", index);
-  pgClient.query("INSERT INTO values(number) VALUES ($1)", [index]);
+  try {
+    await pgClient.query("INSERT INTO fibs(number) VALUES ($1)", [index]);
+  } catch (err) {
+    console.log(err);
+  }
   res.send({ working: true });
 });
 
