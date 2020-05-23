@@ -7,7 +7,7 @@ docker build -t syeo66/multi-server:latest -t syeo66/multi-server:$GIT_SHA -f ./
 docker build -t syeo66/multi-worker:latest -t syeo66/multi-worker:$GIT_SHA -f ./worker/Dockerfile ./worker
 docker build -t syeo66/multi-client:latest -t syeo66/multi-client:$GIT_SHA -f ./client/Dockerfile ./client
   # login to docker cli
-#echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push to docker hub
 
 docker push syeo66/multi-client:$GIT_SHA
