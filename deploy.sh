@@ -20,7 +20,7 @@ docker push syeo66/multi-nginx:latest
 docker push syeo66/multi-server:latest
 docker push syeo66/multi-worker:latest
 
-kubectl apply -f k8s
-kubectl set image deployments/server-deployment server=syeo66/multi-server:$GIT_SHA
-kubectl set image deployments/client-deployment client=syeo66/multi-client:$GIT_SHA
-kubectl set image deployments/worker-deployment worker=syeo66/multi-worker:$GIT_SHA
+#kubectl apply -f k8s
+#kubectl set image deployments/server-deployment server=syeo66/multi-server:$GIT_SHA
+#kubectl set image deployments/client-deployment client=syeo66/multi-client:$GIT_SHA
+#kubectl set image deployments/worker-deployment worker=syeo66/multi-worker:$GIT_SHA
