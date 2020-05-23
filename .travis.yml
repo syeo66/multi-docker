@@ -1,0 +1,20 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+env:
+  global:
+    - GIT_SHA=$(git rev-parse HEAD)
+
+before_install:
+  - docker build -t syeo66/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true syeo66/react-test yarn test
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    branch: master
